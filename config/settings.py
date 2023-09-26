@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'eng_app',
     'reading',
+    'freetalk',
 ]
 
 MIDDLEWARE = [

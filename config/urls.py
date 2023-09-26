@@ -25,6 +25,5 @@ urlpatterns = [
     path('top/', eng_app.views.root),
     path('Home/', include('reading.urls')),
     path('Reading/', include('reading.urls')),
-    path('FreeTalk/', include('reading.urls')),
-
+    path('FreeTalk/', include('freetalk.urls')),
 ]
