@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return render(request, 'reading/index.html')
+    return render(request, 'reading/READING.html')
