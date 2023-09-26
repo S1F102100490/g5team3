@@ -21,5 +21,6 @@ import eng_app.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('top/', eng_app.views.root)
+    path('top/', eng_app.views.root),
+    path('reading/', reading.views.root)
 ]
