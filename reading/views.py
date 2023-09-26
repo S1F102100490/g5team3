@@ -1,5 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def index(request):
-    return render(request, 'reading/READING.html')
+def home(request):
+    return render(request, 'reading/Reading.html')
+
+def reading(request):
+    return render(request, 'reading/Reading.html')
+
+def freetalk(request):
+    return render(request, 'reading/Reading.html')
