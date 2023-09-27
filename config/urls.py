@@ -26,7 +26,6 @@ urlpatterns = [
     path('Reading/', include('reading.urls')),
     path('FreeTalk/', include('freetalk.urls')),
 
-    """ 以下過去のもの """
     path('chat/', include("chat.urls")),
     path('app01/', include('authtest.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
