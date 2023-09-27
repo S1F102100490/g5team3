@@ -2,5 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 
-def reading(request):
+def sample(request):
     return render(request, 'sample/chatgpt.html')
