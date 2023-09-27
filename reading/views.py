@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def reading(request):
-    return render(request, 'reading/Reading.html')
+    return render(request, 'reading/READING.html')
