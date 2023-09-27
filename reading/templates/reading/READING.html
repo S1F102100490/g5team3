@@ -1,16 +1,30 @@
-<!DOCTYPE html>
 {% load static %}
-<html>
-  <head>    
-    <title>team5-project</title>
-    <!-- <link rel="stylesheet" type="text/css" href="{% static 'authtest/css/common.css' %}"> -->
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Chatty English</title>
+        <meta name="description" content="Chatty'homepage">
+        <!--CSS-->
 
-    
-    <h1>ようこそ g5team3 へ <hr>
-      これはreading機能のページです。
-    </h1>
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet">
+    </head>
 
-</body>
+    <body>
+        <div id="home" class="big-bg">
+            <header class="page-header wrapper">
+                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+                <nav>
+                    <ul class="main-nav">
+                      <li><a href="{% url 'Reading' %}">Reading</a></li>
+                      <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
+                      <li><a href="{% url 'Speaking' %}">Speaking </a></li>
+                    </ul>   
+                </nav>
+            </header>
+
+
+        
+    </body>
 </html>
