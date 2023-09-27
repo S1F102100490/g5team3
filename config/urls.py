@@ -24,4 +24,9 @@ urlpatterns = [
     path('Reading/', include('reading.urls')),
     path('FreeTalk/', include('freetalk.urls')),
     path("", include("eng_app.urls")),
+
+    path('chat/', include("chat.urls")),
+    path('app01/', include('authtest.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
