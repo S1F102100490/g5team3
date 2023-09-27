@@ -21,8 +21,7 @@ from reading import views as reading_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('top/', eng_app.views.root),
     path('Reading/', include('reading.urls')),
     path('FreeTalk/', include('freetalk.urls')),
+    path("", include("eng_app.urls")),
 ]
