@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'eng_app',
     'reading',
     'freetalk',
-    'authtest',
 ]
 
 MIDDLEWARE = [
