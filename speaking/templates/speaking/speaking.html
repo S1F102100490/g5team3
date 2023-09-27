@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Chatty English</title>
+        <meta name="description" content="Chatty'homepage">
+        <!--CSS-->
+
+        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
+        <link href="{% static 'speaking/css/style.css' %}" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="home" class="big-bg">
+            <header class="page-header wrapper">
+                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+                <nav>
+                    <ul class="main-nav">
+                      <li><a href="{% url 'Reading' %}">Reading</a></li>
+                      <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
+                      <li><a href="{% url 'Speaking' %}">Speaking </a></li>
+                    </ul>   
+                </nav>
+            </header>
+
+
+        
+    </body>
+</html>
