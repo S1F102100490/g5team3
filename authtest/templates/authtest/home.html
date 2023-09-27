@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>    
+    <title>team5-project</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'authtest/css/common.css' %}">
+  </head>
+  <body>
+
+    
+    <h1>ようこそ　Team5 Channel へ</h1>
+
+    {% if user.is_authenticated %}
+    <p>こんにちわ {{ user.username }}さん</p>
+    <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+    <p><a href="{% url 'login' %}">ログイン</a></p>
+    {% endif %}
+
+    <h2 class="h2title">オープンチャンネル</h2>
+    <form action="{% url 'home' %}" method="post">
+      {% csrf_token %}
+      <div>
+        <label class="add" for="titleInput">チャンネルの追加</label><br>
+        <label for="titleInput">チャンネル名</label><br>
+        <input id="titleInput" name="title" type="text" placeholder="Input title">
+      </div>
+      <div>
+        <label for="textInput">チャンネルの説明</label><br>
+        <textarea id="textInput" name="text" rows="3"></textarea>
+      </div>
+      <div>
+        <button type="submit" class="btn-square">追加</button>
+      </div>
+    </form>
+    <br>
+   
+    <div>
+  	  <a href="{% url 'home' %}?sort=date">新しい順</a> | 
+      <a href="{% url 'home' %}?sort=like">いいね順</a>
+	  </div>
+    
+    {% if articles %}
+    {% for article in articles %}
+    <div class="sled">
+      <h3><a href="{% url 'detail' article.id %}">{{  article.title }}</a></h3>
+      <small>[{{ article.posted_at }}]</small>
+      <div>
+        <a href="" onclick="like({article,id});">
+          Like: <span id="like{{article.id}}">{{ article.like }}</span>
+        </a>
+      </div>
+      <div>
+        {{ article.body |linebreaksbr }}
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No article.</p>
+    {% endif %}
+
+
+
+
+
+
+
+
+    <hr>
+    <p><a href="{% url 'priv' %}">private channel</a></p>
+    
+    <hr>
+    <p>
+  	  <a href="{% url 'home' %}">ページトップへ</a>
+	  </p>
+</body>
+</html>
