@@ -10,6 +10,9 @@ class Article(models.Model):
     published_at = models.DateTimeField(blank=True, null=True)
     like = models.IntegerField(default=0)
 
+    class Meta:
+        app_label = 'authtest'
+
     def publish(self):
         self.published_at = timezone.now()
         self.save()
