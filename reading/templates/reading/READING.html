@@ -1,11 +1,38 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-  <head>
-    <meta charset="UTF-8">
+  <head>    
+    <title>team5-project</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'authtest/css/common.css' %}"> -->
   </head>
   <body>
-    <h1>G5team3 reading機能ページ</h1>
-    
 
-  </body>
+    
+    <h1>ようこそ g5team3 へ</h1>
+<!-- 
+    {% if user.is_authenticated %}
+    <p>こんにちわ {{ user.username }}さん</p>
+    <a href="{% url 'logout' %}">ログアウト</a>
+    {% else %}
+    <p><a href="{% url 'login' %}">ログイン</a></p>
+    {% endif %}
+
+    <h2 class="h2title">オープンチャンネル</h2>
+
+
+
+
+
+
+
+
+
+    <hr>
+    <p><a href="{% url 'priv' %}">private channel</a></p>
+    
+    <hr>
+    <p>
+  	  <a href="{% url 'eng_app' %}">ページトップへ</a>
+	  </p> -->
+</body>
 </html>
