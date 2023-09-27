@@ -24,6 +24,5 @@ urlpatterns = [
     path('Reading/', include('reading.urls')),
     path('FreeTalk/', include('freetalk.urls')),
     path( "", include("eng_app.urls")),
-
-
+    path('sample/', include('sample.urls')),
 ]
