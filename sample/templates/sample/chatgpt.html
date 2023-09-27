@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatGPT Conversation</title>
+</head>
+<body>
+    <div id="chat-container">
+        <!-- Chat conversation will be displayed here -->
+    </div>
+    <input type="text" id="user-input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+    <script>
+        function sendMessage() {
+            const userMessage = document.getElementById("user-input").value;
+            // Display user message
+            appendMessage("User", userMessage);
+            // Send user message to ChatGPT
+            // Handle ChatGPT response and display it
+        }
+
+        function appendMessage(sender, message) {
+            const chatContainer = document.getElementById("chat-container");
+            const messageElement = document.createElement("div");
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatContainer.appendChild(messageElement);
+        }
+    </script>
+</body>
+</html>
