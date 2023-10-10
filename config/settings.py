@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'eng_app',
     'reading',
     'freetalk',
-    'Speaking',
+    'speaking',
     'sample',
 ]
 
