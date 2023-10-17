@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-
+# Create your views here.
 def speaking(request):
-    return render(request, 'speaking/Speaking.html')
+    return render(request, 'speaking/speaking.html')

@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.speaking, name='Speaking'),
-]
+	path('', views.speaking, name='Speaking'),
+    
+	]
