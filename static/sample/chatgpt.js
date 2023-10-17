@@ -1,17 +1,19 @@
-// chatgpt.js
-
+// サーバーに質問を送信
 function askQuestion() {
     const userInput = document.getElementById("userInput").value;
     const chatOutput = document.getElementById("chatOutput");
+
+    // DjangoのCSRFトークンを取得
+    const csrftoken = getCookie("csrftoken");
 
     // サーバーに質問を送信
     fetch("/ask/", {
         method: "POST",
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "X-CSRFToken": getCookie("csrftoken"), // CSRFトークンを含める（Djangoの場合）
+            "Content-Type": "application/json", // JSON形式でデータを送信
+            "X-CSRFToken": csrftoken, // CSRFトークンを含める
         },
-        body: new URLSearchParams({ question: userInput }),
+        body: JSON.stringify({ question: userInput }), // 質問データをJSONに変換
     })
         .then((response) => response.json())
         .then((data) => {
@@ -37,3 +39,4 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
