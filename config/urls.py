@@ -27,5 +27,8 @@ urlpatterns = [
     path( "", include("eng_app.urls")),
     path('sample/', include('sample.urls')),
     path('ask/', include('sample.urls')),
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4715f6ecaf852a2a80649f91cadf30b0ff9ac540
 ]
