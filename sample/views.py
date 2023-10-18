@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 import openai
 
 def sample(request):
-    return render(request, 'sample/chatgpt.html')
+    return render(request, 'sample\chatgpt.html')
 
 
 @csrf_exempt
@@ -26,19 +26,24 @@ def ask_question(request):
         )
         answer = response['choices'][0]['message']['content']
         return JsonResponse({'answer': answer})
+ 
 
-
-
-
-
-
-def setup(request):
+""" 
+def chat_view(request):
     if request.method == 'POST':
-        question = 'これから'+request.POST['topic']+'について、複数人と私でディベートします。 AさんBさんなどの私以外のひとはあなたが演じてください。 ではまず、Aさんの意見を述べて下さい。'
+        user_message = request.POST.get('user_message', '')
+
+        openai.api_key = 'FXiCD7rJs-hPF-C9sPSYITe5gvxTiDpbBuiA3Yld-IZhcx1aLJNMLgPuNg0yodeIbedSpD5tXWHjJTERyT8BOTw'
         response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
-            messages=[{'role':'user', 'content': question}],
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": user_message},
+            ]
         )
-        logs.append({'user': 'ChatGPT', 'content': response['choices'][0]['message']['content']})
-        return render(request,'ArguLink/discussion.html')
-    return render(request,'ArguLink/discussion_setup.html')
+        chatgpt_response = response['choices'][0]['message']['content']
+
+        return JsonResponse({'chatgpt_response': chatgpt_response})
+
+    return render(request, 'templates/sample/chatgpt.html')
+ """

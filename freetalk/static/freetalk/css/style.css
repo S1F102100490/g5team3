@@ -96,3 +96,31 @@ footer p {
     color: #fff;
     font-size: 0.875rem;
 }
+
+
+#chat-container {
+    width: 300px;
+    margin: 0 auto;
+}
+
+#chat-messages {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+}
+
+#user-input {
+    display: flex;
+}
+
+#message-input {
+    flex: 1;
+}
+
+#send-button {
+    background-color: #0074E4;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
