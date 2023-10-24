@@ -6,17 +6,13 @@ from django.views.decorators.csrf import csrf_exempt
 import openai
 
 def sample(request):
-    return render(request, 'sample/chatgpt.html')
+    return render(request, 'sample\chatgpt.html')
 
-
-@csrf_exempt
-def ask_question(request):
+def chatgpt(request):
     if request.method == 'POST':
-        # POST リクエストのデータを JSON として読み込む
-        data = json.loads(request.body.decode('utf-8'))
-        question = data.get('question', '')
+        question = request.POST.get('question', '')
 
-        openai.api_key = 'FXiCD7rJs-hPF-C9sPSYITe5gvxTiDpbBuiA3Yld-IZhcx1aLJNMLgPuNg0yodeIbedSpD5tXWHjJTERyT8BOTw'
+        # ChatGPTとの対話
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -24,26 +20,11 @@ def ask_question(request):
                 {"role": "user", "content": question},
             ]
         )
+
         answer = response['choices'][0]['message']['content']
-        return JsonResponse({'answer': answer})
 
+        # 応答をテンプレートに渡して表示
+        return render(request, 'sample/chatgpt.html', {'question': question, 'answer': answer})
 
-
-
-
-
-def setup(request):
-    if request.method == 'POST':
-        question = 'これから'+request.POST['topic']+'について、複数人と私でディベートします。 AさんBさんなどの私以外のひとはあなたが演じてください。 ではまず、Aさんの意見を述べて下さい。'
-        response = openai.ChatCompletion.create(
-            model='gpt-3.5-turbo',
-            messages=[{'role':'user', 'content': question}],
-        )
-        logs.append({'user': 'ChatGPT', 'content': response['choices'][0]['message']['content']})
-        return render(request,'ArguLink/discussion.html')
-    return render(request,'ArguLink/discussion_setup.html')
-
-
-def chatgpt(request):
-    # ここにビューのロジックを追加
     return render(request, 'sample/chatgpt.html')
+
