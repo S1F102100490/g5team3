@@ -42,3 +42,8 @@ def setup(request):
         logs.append({'user': 'ChatGPT', 'content': response['choices'][0]['message']['content']})
         return render(request,'ArguLink/discussion.html')
     return render(request,'ArguLink/discussion_setup.html')
+
+
+def chatgpt(request):
+    # ここにビューのロジックを追加
+    return render(request, 'sample/chatgpt.html')

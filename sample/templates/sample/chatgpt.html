@@ -1,3 +1,6 @@
+<!-- sample/templates/sample/chatgpt.html -->
+
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,9 +8,19 @@
 </head>
 <body>
     <h1>ChatGPT Chatbot</h1>
-    <input type="text" id="userInput" placeholder="Ask a question">
-    <button onclick="askQuestion()">Ask</button>
-    <div id="chatOutput"></div>
+    <form id="questionForm" action="" method="post">
+        {% csrf_token %}
+        <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
+        <button type="submit">Ask</button>
+    </form>
+    <div id="chatOutput">
+        {% if question %}
+            <p><strong>Your question:</strong> {{ question }}</p>
+        {% endif %}
+        {% if answer %}
+            <p><strong>ChatGPT's response:</strong> {{ answer }}</p>
+        {% endif %}
+    </div>
 </body>
-<script src="../static/sample/chatgpt.js"></script>
+<script src="{% static 'sample/chatgpt.js' %}"></script>
 </html>
