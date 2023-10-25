@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import openai
+
+openai.api_base = 'https://api.openai.iniad.org/api/v1'
+openai.api_key = 'E2Ld8myvbQiLAKdOYdd-V_LV34JqlDy8aZifCjAyB_h0zhQ-vgJn7dfq_2qLq4RvOChvnhCEH57lv_x8Ks58BrQ'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,7 +64,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'sample/templates/sample')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,8 +127,11 @@ USE_TZ = True
 
 # config/settings.py
 
+# config/settings.py
+
 STATIC_URL = '/static/'
-STATICFILES_DIRS = []
+STATICFILES_DIRS = []  # 空のリストに設定
+
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -135,7 +142,6 @@ STATICFILES_FINDERS = [
 MIME_TYPES = (
     ('text/javascript', 'js'),
 )
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
