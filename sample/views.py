@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import openai
+import json
 
 def sample(request):
     return render(request, 'sample\chatgpt.html')

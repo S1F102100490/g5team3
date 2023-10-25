@@ -14,7 +14,7 @@
     <body>
         <div id="home" class="big-bg">
             <header class="page-header wrapper">
-                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static 'eng_app/img/image.png' %}"  alt="Chatty"></a></h1>
                 <nav>
                     <ul class="main-nav">
                         <li><a href="{% url 'Reading' %}">Reading</a></li>
@@ -22,17 +22,23 @@
                         <li><a href="{% url 'Speaking' %}">Speaking </a></li>
                     </ul>   
                 </nav>
-            </header>
+                </header>
+            
             <div class="home-content wrapper">
                 <h2 class="page-title">Well come to Chatty English</h2>
                 <p>英語王国の招待状</a>
+                
             </div><!--進入-->
+            
         </div>
 
-                
-        <a class="button" href="Reading/">Entry</a>
+        <div class="wrapper">
+
+        </div>       
+        
         <footer>
-            <div class="wrapper">
+            <div class="wrapper">            
+                <a class="button" href="Reading/">Entry</a>
                 <p><small>&copy; 20223 team_3 </small></p>
             </div>
         </footer>
