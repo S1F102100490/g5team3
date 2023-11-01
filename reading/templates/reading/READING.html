@@ -8,7 +8,8 @@
         <!--CSS-->
 
         <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
-        <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet">
+        <!-- <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet"> -->
+        <link href="{% static 'reading/css/reading.css' %}" rel="stylesheet">
     </head>
 
     <body>
@@ -58,7 +59,10 @@
                 <li>Bad End</li>   <input type="radio" name="end">
             </ul>
         </p>
-       <input type="submit" value="Make a Sentence!">
+        <button type="submit">
+            <span>Make</span>
+        </button>
+            
        </form>
 
        <h2>Sentence</h2>
