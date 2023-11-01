@@ -15,6 +15,17 @@
         <div id="home" class="big-bg">
             <header class="page-header wrapper">
                 <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+
+                <form id="questionForm" action="" method="post">
+                    {% csrf_token %}
+                    <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
+                    <button type="submit">Ask</button>
+                </form>
+                <div id="chatOutput">
+                    {% for entry in logs %}
+                        <p><strong>{{ entry.user }}:</strong> {{ entry.content }}</p>
+                    {% endfor %}
+                </div>
                 <nav>
                     <ul class="main-nav">
                       <li><a href="{% url 'Reading' %}">Reading</a></li>
