@@ -3,7 +3,7 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
-        <title>Chatty English</title>
+        <title>Reading-リーディング</title>
         <meta name="description" content="Chatty'homepage">
         <!--CSS-->
 
@@ -24,7 +24,65 @@
                 </nav>
             </header>
 
-
+        <h1>Let's Make Sentence</h1>
         
+        
+        <form>
+
+        <h2>Filter by Category</h2>
+        <p>
+            <h3>Length of Sentence</h3>
+            <ul>
+                <li>Short</li> <input type="radio" name="Length" checked="checked">
+                <li>Middle</li><input type="radio" name="Length">
+                <li>Long</li>  <input type="radio" name="Length">
+            </ul>
+        </p> 
+        <p>          
+        <h3>Kind</h3>
+            <ul>
+                <li>Liberal Arts</li> <input type="radio" checked="checked" name="kind">
+                <li>Mystery</li>      <input type="radio" name="kind">
+                <li>Adventure</li>    <input type="radio" name="kind">
+                <li>Romance</li>      <input type="radio" name="kind">
+                <li>SF</li>           <input type="radio" name="kind">
+                <li>Fantasy</li>      <input type="radio" name="kind">
+            </ul>
+        </p>
+        <p>
+        <h3>Mind</h3>
+            <ul>
+                <li>Exciting</li>     <input type="radio" name="mind">
+                <li>Impressive</li>   <input type="radio" name="mind">
+            </ul>
+        </p>
+        <p>
+            <h3>End</h3>
+            <ul>
+                <li>Happy End</li>     <input type="radio" name="end">
+                <li>Bad End</li>   <input type="radio" name="end">
+            </ul>
+        </p>
+       <input type="submit" value="Make a Sentence!">
+       </form>
+
+       <h2>Sentence</h2>
+    
+       <h5>ここに生成した文章挿入</h5>
+
+       <form>
+        <h2>Q. Write a Summary</h2>
+        <textarea rows="20" cols="50"></textarea>
+        <input type="submit" value="Submit">
+       <input type="reset" value="Reset">
+       </form>
+       
+       <h5>評価をここに表示</h5>
+       
+       <h2>Answer</h2>
+       <form><input type="submit" value="Display"></form>
+
+       <h5>回答例表示</h5>
+    
     </body>
 </html>
