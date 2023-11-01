@@ -8,7 +8,8 @@
         <!--CSS-->
 
         <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
-        <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet">
+        <!-- <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet"> -->
+        <link href="{% static 'reading/css/reading.css' %}" rel="stylesheet">
     </head>
 
     <body>
@@ -39,21 +40,16 @@
             </ul>
         </p> 
         <p>          
-        <h3>Kind</h3>
+        <h3>Jenre</h3>
             <ul>
-                <li>Liberal Arts</li> <input type="radio" checked="checked" name="kind">
-                <li>Mystery</li>      <input type="radio" name="kind">
-                <li>Adventure</li>    <input type="radio" name="kind">
-                <li>Romance</li>      <input type="radio" name="kind">
-                <li>SF</li>           <input type="radio" name="kind">
-                <li>Fantasy</li>      <input type="radio" name="kind">
-            </ul>
-        </p>
-        <p>
-        <h3>Mind</h3>
-            <ul>
-                <li>Exciting</li>     <input type="radio" name="mind">
-                <li>Impressive</li>   <input type="radio" name="mind">
+                <li>Liberal Arts</li> <input type="radio" checked="checked" name="jenre">
+                <li>Mystery</li>      <input type="radio" name="jenre">
+                <li>Adventure</li>    <input type="radio" name="jenre">
+                <li>Romance</li>      <input type="radio" name="jenre">
+                <li>SF</li>           <input type="radio" name="jenre">
+                <li>Fantasy</li>      <input type="radio" name="jenre">
+                <li>Exciting</li>      <input type="radio" name="jenre">
+                <li>Impressive</li>      <input type="radio" name="jenre">
             </ul>
         </p>
         <p>
@@ -63,7 +59,10 @@
                 <li>Bad End</li>   <input type="radio" name="end">
             </ul>
         </p>
-       <input type="submit" value="Make a Sentence!">
+        <button type="submit">
+            <span>Make</span>
+        </button>
+            
        </form>
 
        <h2>Sentence</h2>
