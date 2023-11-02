@@ -1,18 +1,25 @@
-<!-- sample/templates/sample/chatgpt.html -->
-
-{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChatGPT</title>
+    <title>文章生成と翻訳</title>
 </head>
 <body>
-    <h1>ChatGPT Chatbot</h1>
-    <form id="questionForm" action="" method="post">
+    <h1>文章生成と翻訳</h1>
+    <form method="post" action="{% url 'generate_article' %}">
         {% csrf_token %}
-        <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
-        <button type="submit">Ask</button>
+        <label for="length">文章の長さ:</label>
+        <input type="number" name="length" id="length" required>
+        <br>
+        <label for="genre">文章のジャンル:</label>
+        <select name="genre" id="genre" required>
+            <option value="科学">科学</option>
+            <option value="文学">文学</option>
+            <!-- 他のジャンルを追加 -->
+        </select>
+        <br>
+        <input type="submit" value="文章を生成">
     </form>
+
     <div id="chatOutput">
         {% if question %}
             <p><strong>Your question:</strong> {{ question }}</p>
@@ -21,6 +28,7 @@
             <p><strong>ChatGPT's response:</strong> {{ answer }}</p>
         {% endif %}
     </div>
+    
 </body>
 <script src="{% static 'sample/chatgpt.js' %}"></script>
 </html>
