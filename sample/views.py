@@ -36,27 +36,31 @@ def chatgpt(request):
     
     return render(request, 'sample/chatgpt.html', {'logs': logs})
 
+def generate_article(request):
+    generated_article = ""  # 生成された文章を格納する変数を初期化
 
-
-""" 
-def chatgpt(request):
     if request.method == 'POST':
-        question = request.POST.get('question', '')
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            # フォームデータを処理
+            length = form.cleaned_data['length']
+            genre = form.cleaned_data['genre']
 
-        # ChatGPTとの対話
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": question},
-            ]
-        )
+            # ChatGPT との対話
+            question = f"生成してほしい文章の長さは {length} で、ジャンルは {genre} です。"
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": question},
+                ]
+            )
 
-        answer = response['choices'][0]['message']['content']
+            # 生成された文章を取得
+            answer = response['choices'][0]['message']['content']
+            generated_article = answer
 
-        # 応答をテンプレートに渡して表示
-        return render(request, 'sample/chatgpt.html', {'question': question, 'answer': answer})
+    else:
+        form = ArticleForm()
 
-    return render(request, 'sample/chatgpt.html')
-
- """
+    return render(request, 'sample/chatgpt.html', {'form': form, 'article': generated_article})
