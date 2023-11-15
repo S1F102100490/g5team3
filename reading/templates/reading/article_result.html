@@ -4,37 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generated Article</title>
-    <link href="{% static 'reading/css/reading.css' %}" rel="stylesheet">
 </head>
 <body>
-    <div id="home" class="big-bg">
-        <header class="page-header wrapper">
-            <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
-            <nav>
-                <ul class="main-nav">
-                  <li><a href="{% url 'Reading' %}">Reading</a></li>
-                  <li><a href="{% url 'FreeTalk' %}">Free Chat</a></li>
-                  <li><a href="{% url 'Speaking' %}">Speaking </a></li>
-                </ul>   
-            </nav>
-        </header>
-
     <h1>Generated Article</h1>
     <p>{{ article }}</p>
-
-   <form>
-    <h2>Q. Write a Summary</h2>
-    <textarea rows="20" cols="50"></textarea>
-    <input type="submit" value="Submit">
-   <input type="reset" value="Reset">
-   </form>
-   
-   <h2>Evaluation</h2>
-   <p>評価をここに表示</p>
-   
-   <h2>Submit</h2>
-   <form><input type="submit" value="Display"></form>
-
-   <p>回答例表示</h5>
 </body>
 </html>
