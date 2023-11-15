@@ -14,6 +14,17 @@
     </head>
 
     <body>
+        <div id="home" class="big-bg">
+            <header class="page-header wrapper">
+                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+                <nav>
+                    <ul class="main-nav">
+                      <li><a href="{% url 'Reading' %}">Reading</a></li>
+                      <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
+                      <li><a href="{% url 'Speaking' %}">Speaking </a></li>
+                    </ul>   
+                </nav>
+            </header>
 
         <form method="post" action="{% url 'generate_article' %}">
             {% csrf_token %}
@@ -39,17 +50,7 @@
             <button type="submit">Generate Article</button>
         </form>
 
-        <div id="home" class="big-bg">
-            <header class="page-header wrapper">
-                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                      <li><a href="{% url 'Reading' %}">Reading</a></li>
-                      <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
-                      <li><a href="{% url 'Speaking' %}">Speaking </a></li>
-                    </ul>   
-                </nav>
-            </header>
+        
 
         <!--<h1>Let's Make Sentence</h1>
         
