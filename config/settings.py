@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'freetalk',
     'speaking',
     'sample',
-    'making,'
 ]
 
 MIDDLEWARE = [
