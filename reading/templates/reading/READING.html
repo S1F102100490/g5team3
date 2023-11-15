@@ -28,7 +28,7 @@
         <h1>Let's Make Sentence</h1>
         
         
-        <form action="{% url 'making' %}">
+        <form>
 
         <h2>Filter by Category</h2>
         <p>
@@ -59,7 +59,7 @@
                 <li>Bad End</li>   <input type="radio" name="end">
             </ul>
         </p>
-        <button type="submit ">
+        <button type="submit", onclick="location.href='{% url making %}'">
             <span>make</span>
         </button>
        </form>    
