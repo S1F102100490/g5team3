@@ -3,6 +3,7 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Reading-リーディング</title>
         <meta name="description" content="Chatty'homepage">
         <!--CSS-->
@@ -13,6 +14,31 @@
     </head>
 
     <body>
+
+        <form method="post" action="{% url 'generate_article' %}">
+            {% csrf_token %}
+            <label for="length">Choose the Length of the Article:</label>
+            <select name="length" required>
+                <option value="short">Short (200 words)</option>
+                <option value="medium">Medium (250 words)</option>
+                <option value="long">Long (300 words)</option>
+            </select><br>
+    
+            <label for="genre">Choose the Genre of the Article:</label>
+            <select name="genre" required>
+                <option value="mystery">Mystery</option>
+                <!-- Add other genre options as needed -->
+            </select><br>
+    
+            <label for="happy_end">Choose the Ending of the Article:</label>
+            <select name="happy_end" required>
+                <option value="yes">Happy End</option>
+                <option value="no">Not Happy End</option>
+            </select><br>
+    
+            <button type="submit">Generate Article</button>
+        </form>
+
         <div id="home" class="big-bg">
             <header class="page-header wrapper">
                 <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
