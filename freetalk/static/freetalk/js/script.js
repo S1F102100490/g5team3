@@ -9,13 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
         // ここでユーザーの入力を処理し、応答を生成するコードを追加
         messageInput.value = "";
     });
-
-    function displayUserMessage(message) {
-        const userMessageElement = document.createElement("div");
-        userMessageElement.textContent = message;
-        userMessageElement.classList.add("user-message");
-        chatMessages.appendChild(userMessageElement);
-    }
-
-    // ここで応答メッセージを表示する関数を追加
 });
+
+function displayUserMessage(message) {
+    const userMessageElement = document.createElement("div");
+    userMessageElement.textContent = message;
+    userMessageElement.classList.add("user-message");
+    chatMessages.appendChild(userMessageElement);
+    // メッセージが追加されたら自動スクロール
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+};
+
+// ここで応答メッセージを表示する関数を追加

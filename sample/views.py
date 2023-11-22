@@ -8,15 +8,15 @@ import openai
 def sample(request):
     return render(request, 'sample\chatgpt.html')
 
+# sample/views.py
 
-@csrf_exempt
-def ask_question(request):
+logs = []  # 会話のログを保持するリスト
+
+def chatgpt(request):
     if request.method == 'POST':
-        # POST リクエストのデータを JSON として読み込む
-        data = json.loads(request.body.decode('utf-8'))
-        question = data.get('question', '')
+        question = request.POST.get('question', '')
 
-        openai.api_key = 'FXiCD7rJs-hPF-C9sPSYITe5gvxTiDpbBuiA3Yld-IZhcx1aLJNMLgPuNg0yodeIbedSpD5tXWHjJTERyT8BOTw'
+        # ChatGPTとの対話
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
@@ -24,26 +24,43 @@ def ask_question(request):
                 {"role": "user", "content": question},
             ]
         )
+
         answer = response['choices'][0]['message']['content']
-        return JsonResponse({'answer': answer})
- 
 
-""" 
-def chat_view(request):
+        # 会話のログに追加
+        logs.append({'user': 'You', 'content': question})
+        logs.append({'user': 'ChatGPT', 'content': answer})
+
+        # 応答をテンプレートに渡して表示
+        return render(request, 'sample/chatgpt.html', {'logs': logs})
+    
+    return render(request, 'sample/chatgpt.html', {'logs': logs})
+
+def generate_article(request):
+    generated_article = ""  # 生成された文章を格納する変数を初期化
+
     if request.method == 'POST':
-        user_message = request.POST.get('user_message', '')
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            # フォームデータを処理
+            length = form.cleaned_data['length']
+            genre = form.cleaned_data['genre']
 
-        openai.api_key = 'FXiCD7rJs-hPF-C9sPSYITe5gvxTiDpbBuiA3Yld-IZhcx1aLJNMLgPuNg0yodeIbedSpD5tXWHjJTERyT8BOTw'
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": user_message},
-            ]
-        )
-        chatgpt_response = response['choices'][0]['message']['content']
+            # ChatGPT との対話
+            question = f"生成してほしい文章の長さは {length} で、ジャンルは {genre} です。"
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": question},
+                ]
+            )
 
-        return JsonResponse({'chatgpt_response': chatgpt_response})
+            # 生成された文章を取得
+            answer = response['choices'][0]['message']['content']
+            generated_article = answer
 
-    return render(request, 'templates/sample/chatgpt.html')
- """
+    else:
+        form = ArticleForm()
+
+    return render(request, 'sample/chatgpt.html', {'form': form, 'article': generated_article})
