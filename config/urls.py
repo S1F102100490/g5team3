@@ -26,5 +26,4 @@ urlpatterns = [
     path('Speaking/', include('speaking.urls')),
     path( "", include("eng_app.urls")),
     path('sample/', include('sample.urls')),
-    path('ask/', include('sample.urls')),
 ]

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Free Talk</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+<h1>Free Talk</h1>
+
+<div id="conversation">
+    {% for conversation in conversations %}
+        <p><strong>User:</strong> {{ conversation.user_input }}</p>
+        <p><strong>ChatGPT:</strong> {{ conversation.chatgpt_response }}</p>
+    {% endfor %}
+</div>
+
+<textarea id="userInput" rows="4" cols="50"></textarea><br>
+<button onclick="sendMessage()">Send</button>
+
+<audio controls id="audioPlayer">
+    <source src="" type="audio/mp3">
+    Your browser does not support the audio element.
+</audio>
+
+<script>
+    function sendMessage() {
+        var userInput = $('#userInput').val();
+        $.post('/chat/', { 'user_input': userInput }, function(data) {
+            $('#conversation').append('<p><strong>User:</strong> ' + userInput + '</p>');
+            $('#conversation').append('<p><strong>ChatGPT:</strong> ' + data.response + '</p>');
+            $('#audioPlayer').attr('src', '/static/freetalk/audio/response.mp3');
+        });
+    }
+</script>
+
+</body>
+</html>
