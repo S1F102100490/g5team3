@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ArticleForm  # ArticleFormはフォームの定義
 from .forms import ReadingForm
+import openai
+
+openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw'
 
 def reading(request):
     return render(request, 'reading/READING.html')
@@ -11,14 +14,26 @@ def reading(request):
 def article_result(request):
     return render(request, 'reading/article_result.html', {'article': 'Generated article will be displayed here.'})
 
-# 仮想的な ChatGPT との連携関数
 def generate_article_with_chatgpt(length, genre, happy_end):
-    # ここで実際の ChatGPT との連携処理を行う
-    # 例えば、OpenAI API を使用したり、ChatGPT サーバーにリクエストを送ったりする
+    try:
+        # ChatGPT へのリクエストパラメータの構築
+        prompt = f"Generate an article with {length} words, in the {genre} genre, with a {'happy' if happy_end == 'yes' else 'not happy'} ending."
 
-    # 仮の実装: ダミーの文章を返す
-    return f"Generated article with length: {length}, genre: {genre}, happy end: {happy_end}"
+        # OpenAI API を使用して ChatGPT に文章生成のリクエストを送る
+        response = openai.Completion.create(
+            engine="text-davinci-003",  # GPT-3.5-turbo エンジンを指定
+            prompt=prompt,
+            max_tokens=400,  # 生成される文章の最大トークン数を指定
+            temperature=0.7  # 生成のランダム性を調整するための temperature パラメータ
+        )
 
+        # API レスポンスから生成された文章を取得
+        generated_article = response.choices[0].text.strip()
+        return generated_article
+
+    except Exception as e:
+        # エラーが発生した場合の処理
+        return f"Error generating article: {str(e)}"
 
 def generate_article(request):
     if request.method == 'POST':
