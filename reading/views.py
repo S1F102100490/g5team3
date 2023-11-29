@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ArticleForm  # ArticleFormはフォームの定義
 from .forms import ReadingForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 import openai
 
 openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw'
@@ -66,3 +68,24 @@ def generate_article(request):
         form = ArticleForm()
     return render(request, 'reading/generate_article.html', {'form': form})
  """
+
+def chatgpt(request):
+    if request.method == 'POST':
+        question = request.POST.get('question', '')
+
+        # ChatGPTとの対話
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": question},
+            ]
+        )
+
+        answer = response['choices'][0]['message']['content']
+
+        # 応答をテンプレートに渡して表示
+        return render(request, 'reading/READING.html', {'question': question, 'answer': answer})
+
+    return render(request, 'reading/READING.html')
+

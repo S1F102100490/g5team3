@@ -73,17 +73,7 @@ img{
     background-size: cover;
     background-position:center;
 }
-#home{
-    background-image: url(../images/sky.jpg);
-    min-height: 100vh;
-    
-}
-#hisory {
-    background-image: url(../images/sky.jpg);
-    height: 450px;
-    margin-bottom: 40px;
-    background-size:cover ;
-}
+
 #history .page-title{
     text-align: center;
 }
