@@ -25,7 +25,7 @@
             </nav>
         </header>
 
-        <form id="questionForm" action="{% url 'AskGPT' %}" method="post">
+        <form id="questionForm" action="" method="post">
             {% csrf_token %}
             <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
             <button type="submit">Ask</button>
