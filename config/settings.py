@@ -125,12 +125,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# config/settings.py
-
-# config/settings.py
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = []  # 空のリストに設定
+
+STATICFILES_DIRS = [
+    BASE_DIR / "reading/static",
+    BASE_DIR / "freetalk/static",
+    BASE_DIR / "speaking/static",
+    BASE_DIR / "sample/static",
+    # 他のアプリのstaticディレクトリも追加
+]
+
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

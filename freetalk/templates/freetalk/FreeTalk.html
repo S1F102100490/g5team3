@@ -4,57 +4,51 @@
 <head>
     <meta charset="utf-8">
     <title>Chatty English</title>
-    <meta name="description" content="Chatty'homepage">
-    <!--CSS-->
+    <meta name="description" content="Chatty's homepage">
+    <!-- CSS -->
     <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
     <link href="{% static 'freetalk/css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
+    <div id="home" class="big-bg">
+        <header class="page-header wrapper">
+            <!-- ここで何かのエラーが出てる 
+            <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
+            -->
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="{% url 'Reading' %}">Reading</a></li>
+                    <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
+                    <li><a href="{% url 'Speaking' %}">Speaking </a></li>
+                </ul>   
+            </nav>
+        </header>
 
+        <form id="questionForm" action="{% url 'AskGPT' %}" method="post">
+            {% csrf_token %}
+            <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
+            <button type="submit">Ask</button>
+        </form>
 
-        <div id="home" class="big-bg">
-            <header class="page-header wrapper">
-                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                      <li><a href="{% url 'Reading' %}">Reading</a></li>
-                      <li><a href="{% url 'FreeTalk' %}">Free cheat</a></li>
-                      <li><a href="{% url 'Speaking' %}">Speaking </a></li>
-                    </ul>   
-                </nav>
-            </header>
-
-
-            <form id="questionForm" action="" method="post">
-                {% csrf_token %}
-                <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
-                <button type="submit">Ask</button>
-            </form>
-            <div id="chatOutput">
-                {% if question %}
-                    <p><strong>Your question:</strong> {{ question }}</p>
-                {% endif %}
-                {% if answer %}
-                    <p><strong>ChatGPT's response:</strong> {{ answer }}</p>
-                {% endif %}
-            </div>
-            
+        <div id="chatOutput">
+            {% if question %}
+                <p><strong>Your question:</strong> {{ question }}</p>
+            {% endif %}
+            {% if answer %}
+                <p><strong>ChatGPT's response:</strong> {{ answer }}</p>
+            {% endif %}
         </div>
-            <div id="chat-container">
-                <div id="chat-messages">
-    
-    
-                </div>
-                <div id="user-input">
-                    <input type="text" id="message-input" placeholder="メッセージを入力">
-                    <button id ="seend-button">Send</button>
-                </div>
-    
-            </div>
-    
-
-                     
+    </div>
+<!-- 
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div id="user-input">
+            <input type="text" id="message-input" placeholder="メッセージを入力">
+            <button id="send-button">Send</button>
+        </div>
+    </div> -->
 </body>
-<script src="{% static 'freetalk/chatgpt.js' %}"></script> 
+
+<script src="{% static 'freetalk/chatgpt.js' %}"></script>
 </html>
