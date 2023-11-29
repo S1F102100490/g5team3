@@ -1,5 +1,10 @@
+  body{
+    background-color: #fdfdfc;
+    font-family: 'Avenir','Helvetica Neue','Helvetica','Arial','Hiragino Sans','ヒラギノ角ゴシック',YuGothic,'Yu Gothic','メイリオ', Meiryo,'MS Pゴシック','MS PGothic' 
+  }
+  
   button {
-    background: #fff;
+    background: #fdfdfc;
     border: none;
     padding: 10px 20px;
     display: inline-block;
@@ -39,3 +44,5 @@
     opacity: 1;
   }
 
+
+  
