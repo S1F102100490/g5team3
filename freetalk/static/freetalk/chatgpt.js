@@ -7,7 +7,7 @@ function askQuestion() {
     const csrftoken = getCookie("csrftoken");
 
     // サーバーに質問を送信
-    fetch("/ask/", {
+    fetch("", {
         method: "POST",
         headers: {
             "Content-Type": "application/json", // JSON形式でデータを送信
