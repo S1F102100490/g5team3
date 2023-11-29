@@ -15,7 +15,7 @@ import os
 import openai
 
 openai.api_base = 'https://api.openai.iniad.org/api/v1'
-openai.api_key = 'E2Ld8myvbQiLAKdOYdd-V_LV34JqlDy8aZifCjAyB_h0zhQ-vgJn7dfq_2qLq4RvOChvnhCEH57lv_x8Ks58BrQ'
+openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw '
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -125,12 +125,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-# config/settings.py
-
-# config/settings.py
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = []  # 空のリストに設定
+
+STATICFILES_DIRS = [
+    BASE_DIR / "reading/static",
+    BASE_DIR / "freetalk/static",
+    BASE_DIR / "speaking/static",
+    BASE_DIR / "sample/static",
+    # 他のアプリのstaticディレクトリも追加
+]
+
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
