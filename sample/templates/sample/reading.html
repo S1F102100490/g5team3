@@ -1,0 +1,24 @@
+{% extends 'sample/base.html' %}
+
+{% block content %}
+    <h1>文章生成と翻訳</h1>
+    <form method="post" action="{% url '' %}">
+        {% csrf_token %}
+        <label for="length">文章の長さ:</label>
+        <input type="number" name="length" id="length" required>
+        <br>
+        <label for="genre">文章のジャンル:</label>
+        <select name="genre" id="genre" required>
+            <option value="科学">科学</option>
+            <option value="文学">文学</option>
+            <!-- 他のジャンルを追加 -->
+        </select>
+        <br>
+        <input type="submit" value="文章を生成">
+    </form>
+
+    <!-- 生成された文章を表示 -->
+    {% if generated_text %}
+        <p><strong>Generated Text:</strong> {{ generated_text }}</p>
+    {% endif %}
+{% endblock %}
