@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>文章生成と翻訳</h1>
-    <form method="post" action="{% url '' %}">
+    <form method="post" action="{% url 'sample:generate_text' %}">
         {% csrf_token %}
         <label for="length">文章の長さ:</label>
         <input type="number" name="length" id="length" required>
@@ -19,6 +19,7 @@
 
     <!-- 生成された文章を表示 -->
     {% if generated_text %}
-        <p><strong>Generated Text:</strong> {{ generated_text }}</p>
+        <h2>生成された文章</h2>
+        <p>{{ generated_text }}</p>
     {% endif %}
 {% endblock %}
