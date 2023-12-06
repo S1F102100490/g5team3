@@ -18,7 +18,13 @@ def chatgpt(request):
     # Check if the 'clear_history' parameter is present in the URL
     if request.GET.get('clear_history') == 'true':
         # Clear the chat history
+        
         request.session['chat_history'] = []
+        media_path = "./freetalk/media"
+        for file_name in os.listdir(media_path):
+            if file_name.endswith(".mp3"):
+                file_path = os.path.join(media_path, file_name)
+                os.remove(file_path)
         return redirect('chatgpt')
 
     if request.method == 'POST':
@@ -32,7 +38,7 @@ def chatgpt(request):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are an English teacher for beginners. Respond in clear and simple English."},
+                {"role": "system", "content": "You are an English teacher for beginners. Respond in clear and simple English ant  bewteen 20 and 40 words."},
                 *messages_for_gpt  # Include the chat history in the messages
             ]
         )
@@ -61,9 +67,3 @@ def chatgpt(request):
 def chat_view(request):
     return render(request, 'freetalk/chat.html')
 
-def generate_speech(request):
-    text = request.GET.get('text', '')
-    tts = gTTS(text, lang='en')
-    speech_file_path = f"media/speech.mp3"
-    tts.save(speech_file_path)
-    return JsonResponse({'speech_file_path': speech_file_path})

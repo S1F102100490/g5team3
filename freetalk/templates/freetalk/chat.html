@@ -23,7 +23,7 @@
                 {% endif %}
                 {{ message.content }}
                 {% if message.role == 'assistant' %}
-                    <button class="text-to-speech-btn" onclick="speakText('{{ message.speech_file_path }}')">Listen</button>
+                    <button class="text-to-speech-btn" onclick="speakText('{{ message.content }}')">Listen</button>
                 {% endif %}
             </div>
         {% endfor %}
@@ -38,12 +38,10 @@
     </form>
 
     <script>
-        function speakText(path) {
-            var mp3FilePath = path;
+        function speakText(text) {
+            var msg = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(msg);
 
-            var audio = new Audio(mp3FilePath);
-
-            audio.play();
         }
 
         function clearHistory() {
