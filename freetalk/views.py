@@ -1,3 +1,5 @@
+# views.py
+
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -7,7 +9,6 @@ import os
 
 @csrf_exempt
 def chatgpt(request):
-    
     openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
     openai.api_base = "https://api.openai.iniad.org/api/v1"
 
@@ -22,16 +23,17 @@ def chatgpt(request):
 
     if request.method == 'POST':
         question = request.POST.get('question', '')
-        
+
         # Add user's question to the chat history
         chat_history.append({"role": "user", "content": question})
-
-        # ChatGPT interaction
+        messages_for_gpt = [ {"role": message["role"], "content": message["content"]}
+        for message in chat_history]
+       # ChatGPT interaction
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are an English teacher for beginners. Respond in clear and simple English."},
-                *chat_history  # Include the chat history in the messages
+                *messages_for_gpt  # Include the chat history in the messages
             ]
         )
 
@@ -39,10 +41,9 @@ def chatgpt(request):
 
         # Check if the answer is too long
         answer_too_long = len(answer) > 300  # Adjust the threshold as needed
-        count = len(request.session["chat_history"])
+
         # Convert ChatGPT's answer to speech
-        speech_file_path = os.path.join("./media", "speech_{}.mp3".format(count+1))
-        
+        speech_file_path = os.path.join("./freetalk/media", f"speech_{len(chat_history)}.mp3")
         tts = gTTS(answer, lang='en')
         tts.save(speech_file_path)
 
@@ -59,3 +60,10 @@ def chatgpt(request):
 
 def chat_view(request):
     return render(request, 'freetalk/chat.html')
+
+def generate_speech(request):
+    text = request.GET.get('text', '')
+    tts = gTTS(text, lang='en')
+    speech_file_path = f"media/speech.mp3"
+    tts.save(speech_file_path)
+    return JsonResponse({'speech_file_path': speech_file_path})
