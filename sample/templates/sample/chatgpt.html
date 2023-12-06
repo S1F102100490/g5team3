@@ -21,6 +21,24 @@
             <p><strong>ChatGPT's response:</strong> {{ answer }}</p>
         {% endif %}
     </div>
+
+
+
+    <h1>文章生成と翻訳</h1>
+    <form method="post" action="{% url 'generate_article' %}">
+        {% csrf_token %}
+        <label for="length">文章の長さ:</label>
+        <input type="number" name="length" id="length" required>
+        <br>
+        <label for="genre">文章のジャンル:</label>
+        <select name="genre" id="genre" required>
+            <option value="科学">科学</option>
+            <option value="文学">文学</option>
+            <!-- 他のジャンルを追加 -->
+        </select>
+        <br>
+        <input type="submit" value="文章を生成">
+    </form>
 </body>
 <script src="{% static 'sample/chatgpt.js' %}"></script>
 </html>
