@@ -29,4 +29,7 @@ urlpatterns = [
     path('ask_sample/', include('sample.urls')),
     path('ask_freeatlk/', include('freetalk.urls')),
     path('ask_reading/', include('reading.urls')),
+    path( "signup", include("eng_app.urls")),
+    path( "login", include("eng_app.urls")),
+    path( "logout", include("eng_app.urls")),
 ]
