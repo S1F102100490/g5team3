@@ -20,7 +20,7 @@ def chatgpt(request):
         # Clear the chat history
         
         request.session['chat_history'] = []
-        media_path = "./freetalk/media"
+        media_path = "./freetalk/static/media"
         for file_name in os.listdir(media_path):
             if file_name.endswith(".mp3"):
                 file_path = os.path.join(media_path, file_name)
@@ -49,21 +49,22 @@ def chatgpt(request):
         answer_too_long = len(answer) > 300  # Adjust the threshold as needed
 
         # Convert ChatGPT's answer to speech
-        speech_file_path = os.path.join("./freetalk/media", f"speech_{len(chat_history)}.mp3")
+        speech_file_path = os.path.join("./freetalk/static/media/", f"speech_{len(chat_history)}.mp3")
         tts = gTTS(answer, lang='en')
         tts.save(speech_file_path)
-
+        
         # Add ChatGPT's answer and speech file path to the chat history
-        chat_history.append({"role": "assistant", "content": answer, "speech_file_path": speech_file_path})
+        chat_history.append({"role": "assistant", "content": answer, "id": int(len(chat_history)/2), 'path': f'/static/media/speech_{len(chat_history)}.mp3'  })
 
         # Update the chat history in the session
         request.session['chat_history'] = chat_history
 
         # Pass the chat history to the template
-        return render(request, 'freetalk/chat.html', {'question': question, 'answer': answer, 'chat_history': chat_history, 'answer_too_long': answer_too_long})
+        return render(request, 'freetalk/chat.html', {'question': question, 'answer': answer, 'chat_history': chat_history })
 
     return render(request, 'freetalk/chat.html', {'chat_history': chat_history})
 
 def chat_view(request):
     return render(request, 'freetalk/chat.html')
+
 

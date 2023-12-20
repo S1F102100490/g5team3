@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     {% load static %}
     <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    <link href="{% static 'media' %}">
 </head>
 <body>
 
@@ -23,8 +25,8 @@
                 {% endif %}
                 {{ message.content }}
                 {% if message.role == 'assistant' %}
-                    <button class="text-to-speech-btn" onclick="speakText('{{ message.content }}')">Listen</button>
-                {% endif %}
+                <button class="text-to-speech-btn" onclick="speakText('{{ message.path }}')">Listen</button>
+            {% endif %}
             </div>
         {% endfor %}
     </div>
@@ -38,16 +40,20 @@
     </form>
 
     <script>
-        function speakText(text) {
-            var msg = new SpeechSynthesisUtterance(text);
-            window.speechSynthesis.speak(msg);
+        function speakText(path) {
+            var mp3FilePath =   path;
 
+            var audio = new Audio(mp3FilePath);
+
+            audio.play();
         }
 
         function clearHistory() {
             // Redirect to the same page with a 'clear_history' parameter
             window.location.href = "{% url 'chatgpt' %}?clear_history=true";
         }
+
+
     </script>
 
 </body>
