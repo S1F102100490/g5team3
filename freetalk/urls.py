@@ -1,7 +1,12 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.freetalk, name='FreeTalk'),
-    path('ask/', views.chatgpt, name='AskGPT'),  # URLを'/ask/'から'/freetalk/ask/'に変更
+    path('', views.chat_view, name="FreeTalk"),
+    path('chatgpt/',views.chatgpt, name="chatgpt"),
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
