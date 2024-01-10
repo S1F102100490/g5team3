@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <!-- 他の共通のスタイルやスクリプトのリンクを追加 -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <!-- サイトのヘッダー -->
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <!-- サイトのフッター -->
+    </footer>
+    <!-- 他の共通のスクリプトのリンクを追加 -->
+    <script src="{% static 'sample/chatgpt.js' %}"></script>
+</body>
+</html>
