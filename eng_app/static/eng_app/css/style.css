@@ -1,98 +1,122 @@
-@charset "UTF-8";
+@charset "utf-8";
 
-html{
-    font-size: 100%;
+/*========= ローディング画面のためのCSS ===============*/
+#splash {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  z-index: 9999999;
+  text-align:center;
+  color:#fff;
 }
+
+#splash-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/*========= 画面遷移のためのCSS ===============*/
+
+/*画面遷移アニメーション*/
+
 body{
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    line-height: 1.7;
-    color: 
-    #432;
-}
-a{
-    text-decoration: none;
-}
-img{
-    max-width: 100%;
-}
-.logo{
-    width: 120px;
-    
-}
-.main-nav{
-    display: flex;
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    margin-top: 86px;
-    list-style: none;
-}
-.main-nav li {
-    margin-left: 36px;
-}
-.main-nav a {
-    color: #432
-}
-.main-nav a:hover{
-        color: #0bd;
+    background:#333;/*遷移アニメーションと同じ色を指定*/
 }
 
-.page-header{
-    display: flex;
-    justify-content: space-between;
+body.appear{
+    background:#fff;/*画面を開いた後の背景色を指定*/
 }
-.wrapper{
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 4%;
+
+.splashbg{
+  position: fixed;
+  top: 0;
+  right:0;
+  bottom:0;
+  left: 0;
+  border-width: 0px;/*開始はボーダーの太さは0*/
+  border-style:solid;
+    border-color: #666;/*拡大する四角の色*/
+  animation-duration:.5s;
+  animation-fill-mode:forwards;
 }
-.home-content{
-    text-align: center;
-    margin-top: 10%;
+
+@keyframes backBoxAnime{
+  99.9% {/*アニメーション終了ぎりぎりまで*/
+        z-index: 2;/*最前面に*/
+    border-width: 0px;/*開始はボーダーの太さは0*/
+  }
+    100%{
+       z-index: -1; /*最背面に*/
+        border-width: 0px;/*終了はボーダーの太さは0*/
+    }
 }
-.home-centent p{
-    font-size: 1.125rem;
-    margin: 10px 0 42px;
+
+/*画面遷移の後現れるコンテンツ設定*/
+#container{
+    position: relative;
+  opacity: 0;/*はじめは透過0に*/
 }
-.page-title{
-    font-size: 5rem;
-    font-family: "Philosopher",serif;
-    text-transform: uppercase;
-    font-weight: normal;
+
+/*bodyにappearクラスがついたら出現*/
+body.appear #container{
+  animation-name:PageAnimeAppear;
+  animation-duration:1s;
+  animation-delay:0.2s;
+  animation-fill-mode:forwards;
+  opacity: 0;
 }
-.button{
-    font-size: 1.375rem;
-    background: #0bd;
-    color:#fff;
-    border-radius:10px;
-    padding: 18px 32px;
+
+@keyframes PageAnimeAppear{
+  0% {
+  opacity: 0;
+  }
+  100% {
+  opacity: 1;
 }
-.button:hover{
-        background:#0090aa;
 }
-.big-bg{
-    background-size: cover;
-    background-position:center;
+/*========= レイアウトのためのCSS ===============*/
+
+h1{
+  font-size:1.2rem;
 }
-#home{
-    background-image: url(../images/sky.jpg);
-    min-height: 100vh;
-    
+
+h2{
+  font-size:1.2rem;
+  text-align: center;
+  margin: 0 0 30px 0;
 }
-#hisory {
-    background-image: url(../images/sky.jpg);
-    height: 450px;
-    margin-bottom: 40px;
-    background-size:cover ;
+
+p{
+  margin-top:20px;  
 }
-#history .page-title{
-    text-align: center;
+
+small{
+  color:#fff;
+  display: block;
+  text-align: center;
 }
-footer{
-    background: rgb(34, 169, 179);
-    text-align:center;
-    padding: 26px 0;
+
+#header{
+  background:#444;
+  color:#fff;
+  text-align: center;
+  padding: 20px;
 }
-footer p {
-    color: #fff;
-    font-size: 0.875rem;
+
+section{
+    background:#fff;
+  padding:100px 30px;
+}
+
+section:nth-child(2n){
+  background:#f3f3f3; 
+}
+
+#footer{
+  background:#333;
+  padding:20px;
 }
