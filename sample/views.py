@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import openai
@@ -49,10 +49,19 @@ def generate_text(request):
         user_input = f"Length: {length}, Genre: {genre}"
         GeneratedText.objects.create(user_input=user_input, generated_text=generated_text)
 
+        # ChatGPT の応答も取得できるように追加
+        answer = chatgpt_response['choices'][0]['message']['content']
+
+        # Update the chat history in the session
+        chat_history = request.session.get('chat_history', [])
+        chat_history.append({"role": "user", "content": user_input})
+        chat_history.append({"role": "assistant", "content": answer})
+        request.session['chat_history'] = chat_history
+
         # 生成された文章をJSON形式で返す（適切な形式に変更）
         return JsonResponse({'generated_text': generated_text})
 
-    return render(request, 'sample/chatgpt.html')
+    return render(request, 'sample/chatgpt.html', {'question': question, 'answer': answer, 'chat_history': chat_history, 'generated_text': generated_text})
 
 def reading(request):
     if request.method == 'POST':
