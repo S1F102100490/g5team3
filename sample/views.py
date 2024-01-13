@@ -1,13 +1,13 @@
+# views.py
+
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 import openai
 from .models import GeneratedText
 
-openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw '
-
-def sample(request):
-    return render(request, 'sample\chatgpt.html')
+openai.api_key = settings.OPENAI_API_KEY
 
 def chatgpt(request):
     if request.method == 'POST':
@@ -30,18 +30,18 @@ def chatgpt(request):
     return render(request, 'sample/chatgpt.html')
 
 
-def generate_text(request):
+
+
+def reading(request):
     if request.method == 'POST':
         length = request.POST.get('length')
         genre = request.POST.get('genre')
 
         # ChatGPT との対話を行う処理
-        # 以下は仮の例。実際には ChatGPT API を呼び出して結果を取得する必要があります。
-        # また、ChatGPT API を使用する際には適切な API キーを設定してください。
         chatgpt_response = openai.Completion.create(
-            engine="text-davinci-003",  # 使用する ChatGPT エンジン
+            engine="text-davinci-003",
             prompt=f"Generate text with length: {length}, genre: {genre}",
-            max_tokens=int(length)  # 生成する文章の長さを指定
+            max_tokens=int(length)
         )
         generated_text = chatgpt_response['choices'][0]['text']
 
@@ -53,29 +53,47 @@ def generate_text(request):
         answer = chatgpt_response['choices'][0]['message']['content']
 
         # Update the chat history in the session
-        chat_history = request.session.get('chat_history', [])
         chat_history.append({"role": "user", "content": user_input})
         chat_history.append({"role": "assistant", "content": answer})
         request.session['chat_history'] = chat_history
 
-        # 生成された文章をJSON形式で返す（適切な形式に変更）
-        return JsonResponse({'generated_text': generated_text})
+        # 生成された文章をJSON形式で返す
+        return JsonResponse({'generated_text': generated_text, 'assistant_response': answer})
 
-    return render(request, 'sample/chatgpt.html', {'question': question, 'answer': answer, 'chat_history': chat_history, 'generated_text': generated_text})
+    return render(request, 'sample/reading.html')
 
-def reading(request):
+
+
+
+def generate_text(request):
+    # Initialize or get the chat history from the session
+    chat_history = request.session.get('chat_history', [])
+
     if request.method == 'POST':
         length = request.POST.get('length')
         genre = request.POST.get('genre')
 
-        # ここでChatGPTとの対話を行い、文章を生成する処理を実装
+        # ChatGPT との対話を行う処理
+        chatgpt_response = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=f"Generate text with length: {length}, genre: {genre}",
+            max_tokens=int(length)
+        )
+        generated_text = chatgpt_response['choices'][0]['text']
 
         # 生成された文章をデータベースに保存
-        generated_text = "Generated text"  # 仮の生成テキスト
-        user_input = f"Length: {length}, Genre: {genre}"  # 仮のユーザー入力
+        user_input = f"Length: {length}, Genre: {genre}"
         GeneratedText.objects.create(user_input=user_input, generated_text=generated_text)
 
-        # 生成された文章をJSON形式で返す（適切な形式に変更）
+        # ChatGPT の応答も取得できるように追加
+        answer = chatgpt_response['choices'][0]['message']['content']
+
+        # Update the chat history in the session
+        chat_history.append({"role": "user", "content": user_input})
+        chat_history.append({"role": "assistant", "content": answer})
+        request.session['chat_history'] = chat_history
+
+        # 生成された文章をJSON形式で返す
         return JsonResponse({'generated_text': generated_text})
 
-    return render(request, 'sample/reading.html')
+    return render(request, 'sample/chatgpt.html', {'chat_history': chat_history})
