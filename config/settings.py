@@ -133,6 +133,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "freetalk/static",
     BASE_DIR / "speaking/static",
     BASE_DIR / "sample/static",
+    os.path.join(BASE_DIR, 'static'),
     # 他のアプリのstaticディレクトリも追加
 ]
 
