@@ -70,7 +70,7 @@ nav a {
 
 .btntransform{
     position: absolute;
-    left: 44%;
+    left: 48%;
     transform: translate(-50%, -50%);
     bottom: 38%;
     /*丸の基点とするためrelativeを指定*/
@@ -102,7 +102,7 @@ nav a {
 
 /*hoverした際の形状*/
 .btntransform:hover::before{
-  width:212px;
+  width: 106px;
 }
 
 /* 矢印の形状 */
