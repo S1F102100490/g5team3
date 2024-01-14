@@ -49,10 +49,11 @@ nav ul {
     list-style: none;
     padding: 0;
     display: flex;
+    margin: 0;
 }
 
 nav li {
-    margin-right: 50px; /* リストアイテム間のスペース（お好みで調整） */
+    margin-right: 100px; /* リストアイテム間のスペース（お好みで調整） */
 }
 
 nav a {
