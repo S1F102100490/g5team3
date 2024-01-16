@@ -1,12 +1,10 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
-
 
 html{
     font-size: 100%;
 }
 body{
-        font-family: 'Exo', sans-serif;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     line-height: 1.7;
     color: 
     #432;

@@ -32,7 +32,6 @@ def chatgpt(request):
     return render(request, 'sample/chatgpt.html')
 
 
-# views.py
 
 # views.py
 
@@ -45,11 +44,11 @@ def reading(request):
         user_question = request.POST.get('question', '')
 
         # ChatGPTとの対話
-        chat_prompt = f"Generate an English text. Length: {length}, Genre: {genre}"
+        chat_prompt = f"文章の長さは{length}, ジャンルは{genre}でお願いします。"
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "system", "content": "あなたは物語を作る著者です。会話への応答は文章のタイトルと文章の内容のみで結構です。"},
                 {"role": "user", "content": user_question},
 
             ]
@@ -58,7 +57,7 @@ def reading(request):
         answer = response['choices'][0]['message']['content']
 
         # 応答をテンプレートに渡して表示
-        return render(request, 'sample/reading.html', {'question': user_question, 'answer': answer})
+        return render(request, 'sample/reading.html', {'answer': answer})
 
     return render(request, 'sample/reading.html')
 
