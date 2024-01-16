@@ -4,39 +4,61 @@
     <head>
         <meta charset="utf-8">
         <title>Chatty English</title>
-        <meta name="description" content="Chatty'homepage">
+        <link rel='stylesheet' href='https://unpkg.com/ress/dist/ress.min.css'>
+        <meta name="description" content="Chatty'homepage, initial-scale=1.0">
         <!--CSS-->
 
-        <link href="https://fonts.googleapis.com/css?family=Philosopher" rel="stylesheet">
-        <link href="{% static 'eng_app/css/style.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'style/index1.css' %}">
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
     </head>
 
     <body>
-        <div id="home" class="big-bg">
-            <header class="page-header wrapper">
-                <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty"></a></h1>
-                <nav>
-                    <ul class="main-nav">
-                        <li><a href="{% url 'sample' %}">Reading</a></li>
-                        <li><a href="{% url 'FreeTalk' %}">Free Chat</a></li>
-                        <li><a href="{% url 'Speaking' %}">Speaking </a></li>
-                    </ul>   
-                </nav>
-            </header>
-            <div class="home-content wrapper">
-                <h2 class="page-title">Well come to Chatty English</h2>
-                <p>英語王国の招待状</a>
-            </div><!--進入-->
-        </div>
+        <div class="context">
+            
 
-                
-        <a class="button" href="Reading/">Entry</a>
-        <footer>
-            <div class="wrapper">
-                <p><small>&copy; 20223 team_3 </small></p>
-            </div>
-        </footer>
+            <h1>Chatty English</h1>    
+
+        </div>
+    
+    
+        <div class="area" >    
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>    
+        </div >    
         
+        <header>
+            <!-- <h1><a href="{% url 'index' %}"><img class="logo" src="{% static '' %}"  alt="Chatty English"></a></h1> -->
+            <nav>
+                <ul class="main-nav">                            
+                    <li><a href="{% url 'sample' %}">Reading</a></li>
+                    <li><a href="{% url 'FreeTalk' %}">Free Chat</a></li>
+                    <li><a href="{% url 'Speaking' %}">Speaking </a></li>
+                </ul>   
+            </nav>
+        </header>
+
+
+        
+            <a href="Reading/" class="btntransform" >    Let's try!</a>
+        
+        
+
+            <footer>
+                <div class="wrapper">
+                    <p><small>&copy; 2023 team_3 </small></p>
+                </div>
+            </footer>
         
     </body>
 </html>
