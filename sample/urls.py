@@ -3,6 +3,8 @@ from . import views
 from .views import generate_text
 from .views import reading
 
+app_name = 'sample'
+
 urlpatterns = [
     path('', views.chatgpt, name='sample'),
     path('ask/', views.chatgpt, name='AskGPT'),

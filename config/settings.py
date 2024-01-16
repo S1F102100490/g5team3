@@ -16,6 +16,7 @@ import openai
 
 openai.api_base = 'https://api.openai.iniad.org/api/v1'
 openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw '
+OPENAI_API_KEY = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,9 +134,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "freetalk/static",
     BASE_DIR / "speaking/static",
     BASE_DIR / "sample/static",
-    os.path.join(BASE_DIR, 'static'),
+
     # 他のアプリのstaticディレクトリも追加
 ]
+""" os.path.join(BASE_DIR, 'static'), """
 
 
 STATICFILES_FINDERS = [
