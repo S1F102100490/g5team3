@@ -37,6 +37,8 @@ def chatgpt(request):
 # views.py
 
 def reading(request):
+    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
+    openai.api_base = "https://api.openai.iniad.org/api/v1"
     if request.method == 'POST':
         length = request.POST.get('length', '')
         genre = request.POST.get('genre', '')
@@ -49,7 +51,7 @@ def reading(request):
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": user_question},
-                {"role": "assistant", "content": chat_prompt},
+
             ]
         )
 
@@ -62,22 +64,28 @@ def reading(request):
 
 
 def generate_text(request):
+    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
+    openai.api_base = "https://api.openai.iniad.org/api/v1"
+
     if request.method == 'POST':
-        word_count = int(request.POST.get('word_count', 50))
+        word_count = int(request.POST.get('word_count', 100 ))
         genre = request.POST.get('genre', '')
 
-        
+        chat_prompt = "Generate an  article in English. Words: {}, Genre: {}".format(word_count,genre)
 
         response = openai.ChatCompletion.create(
 
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": f"Write a {genre} text with {word_count} words:"},
+                {"role": "system", "content": "You will be a teacher for beginner English student"},
+                {"role": "system", "content": "Then please generate the Title"},
+                {"role": "user", "content": chat_prompt},
+
             ]
         )
 
         generated_text = response['choices'][0]['message']['content']
 
-        return render(request,"sample/reading.html",{"generated_text": generated_text})
+        return render(request, "sample/reading.html", {"message": generated_text})
 
-    return render(request,"sample/reading.html",{"generated_text": generated_text})
+    return render(request,"sample/reading.html",{"message": generated_text})
