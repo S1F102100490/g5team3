@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>ChatGPT Chatbot</h1>
-    <form id="questionForm" action="" method="post">
+    <form id="questionForm" action="{% url 'sample:reading' %}" method="post">
         {% csrf_token %}
         <textarea id="userInput" name="question" placeholder="Ask a question"></textarea>
         <button type="submit">Ask</button>
@@ -29,6 +29,9 @@
             <!-- 他のジャンルを追加 -->
         </select>
         <br>
+        <label for="question">Ask me anything:</label>
+        <input type="text" name="question" required>
+        <br>
         <input type="submit" value="文章を生成">
     </form>
 
@@ -36,10 +39,10 @@
     <div id="generatedText">
         {% if generated_text %}
             <h2>生成された文章</h2>
-            <p>{{ generated_text }}</p>
+            <p id="generatedContent">{{ generated_text.content }}</p>
         {% endif %}
     </div>
-
+    
     <!-- JavaScript でフォームのサブミットを処理 -->
     <script>
         document.getElementById('generateForm').addEventListener('submit', function (e) {
@@ -53,10 +56,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('generatedText').innerHTML = `
-                    <h2>生成された文章</h2>
-                    <p>${data.generated_text}</p>
-                `;
+                // 生成された文章を表示する要素にデータをセット
+                document.getElementById('generatedContent').innerHTML = data.generated_text.content;
             })
             .catch(error => {
                 console.error('Error:', error);

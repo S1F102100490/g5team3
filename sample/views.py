@@ -64,18 +64,20 @@ def reading(request):
 def generate_text(request):
     if request.method == 'POST':
         word_count = int(request.POST.get('word_count', 50))
-        genre = request.POST.get('genre', '科学')
+        genre = request.POST.get('genre', '')
 
-        openai.api_key = 'YOUR_OPENAI_API_KEY'
+        
 
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=f"Write a {genre} text with {word_count} words:",
-            max_tokens=word_count
+        response = openai.ChatCompletion.create(
+
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": f"Write a {genre} text with {word_count} words:"},
+            ]
         )
 
-        generated_text = response.choices[0].text.strip()
+        generated_text = response['choices'][0]['message']['content']
 
-        return HttpResponse(generated_text)
+        return render(request,"sample/reading.html",{"generated_text": generated_text})
 
-    return HttpResponse('Invalid Request')
+    return render(request,"sample/reading.html",{"generated_text": generated_text})

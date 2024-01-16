@@ -8,6 +8,6 @@ app_name = 'sample'
 urlpatterns = [
     path('', views.chatgpt, name='sample'),
     path('ask/', views.chatgpt, name='AskGPT'),
-    path('generate_text/', views.chatgpt, name='generate_text'),
+    path('generate_text/', views.generate_text, name='generate_text'),
     path('reading/', views.reading, name='reading'),
 ]
