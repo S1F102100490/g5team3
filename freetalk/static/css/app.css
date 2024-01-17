@@ -1,6 +1,7 @@
-body {
-    font-family: Arial, sans-serif;
-}
+body, html {
+    background: #007bff;
+    height: 100%;
+  }
 p {
     margin: 0px;
 }

@@ -15,6 +15,14 @@ function askQuestion() {
         },
         body: JSON.stringify({ question: userInput }), // 質問データをJSONに変換
     })
+    fetch("/ask_sample/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", // JSON形式でデータを送信
+            "X-CSRFToken": csrftoken, // CSRFトークンを含める
+        },
+        body: JSON.stringify({ question: userInput }), // 質問データをJSONに変換
+    })
         .then((response) => response.json())
         .then((data) => {
             // ChatGPTからの応答を表示
@@ -23,6 +31,8 @@ function askQuestion() {
             chatOutput.appendChild(chatMessage);
         });
 }
+
+
 
 // DjangoのCSRFトークンを取得
 function getCookie(name) {

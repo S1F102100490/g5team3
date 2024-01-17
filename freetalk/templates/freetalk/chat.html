@@ -1,43 +1,44 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FreeTalk Chat</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    {% load static %}
-    <link href="{% static 'css/app.css' %}" rel="stylesheet">
-    <link href="{% static 'media' %}">
-</head>
-<body>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="description" content="Chatty'homepage, initial-scale=1.0">
+        <title>FreeTalk Chat</title>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <link href="{% static 'css/app.css' %}" rel="stylesheet">
+        <link href="{% static 'media' %}">
 
-    <h1>FreeTalk Chat</h1>
+    </head> 
 
-    <div id="chat-container">
-        {% for message in chat_history %}
-            <div class="{% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
-                {% if message.role == 'user' %}
-                    <span class="message-sender">You:</span>
-                {% elif message.role == 'assistant' %}
-                    <span class="message-sender">Teacher:</span>
+    <body>
+
+        <h1>FreeTalk Chat</h1>
+
+        <div id="chat-container">
+            {% for message in chat_history %}
+                <div class="{% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
+                    {% if message.role == 'user' %}
+                        <span class="message-sender">You:</span>
+                    {% elif message.role == 'assistant' %}
+                        <span class="message-sender">Teacher:</span>
+                    {% endif %}
+                    {{ message.content }}
+                    {% if message.role == 'assistant' %}
+                    <button class="text-to-speech-btn" onclick="speakText('{{ message.path }}')">Listen</button>
                 {% endif %}
-                {{ message.content }}
-                {% if message.role == 'assistant' %}
-                <button class="text-to-speech-btn" onclick="speakText('{{ message.path }}')">Listen</button>
-            {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+                </div>
+         {% endfor %}
+        </div>
 
-    <form method="post" action="{% url 'chatgpt' %}">
-        {% csrf_token %}
-        <label for="question">Ask me anything:</label>
-        <input type="text" name="question" required>
-        <button type="submit" class="ask-btn">Ask</button>
-        <button type="button" class="clear-history-btn" onclick="clearHistory()">Clear History</button>
-    </form>
+        <form method="post" action="{% url 'chatgpt' %}">
+             {% csrf_token %}
+            <label for="question">Ask me anything:</label>
+            <input type="text" name="question" required>
+            <button type="submit" class="ask-btn">Ask</button>
+            <button type="button" class="clear-history-btn" onclick="clearHistory()">Clear History</button>
+        </form>
 
     <script>
         function speakText(path) {
@@ -56,5 +57,5 @@
 
     </script>
 
-</body>
+    </body>
 </html>
