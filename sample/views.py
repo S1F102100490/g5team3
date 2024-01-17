@@ -8,7 +8,6 @@ import openai
 from .models import GeneratedText
 from django.http import HttpResponse
 
-openai.api_key = settings.OPENAI_API_KEY
 openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw '
 
 def chatgpt(request):
@@ -36,8 +35,6 @@ def chatgpt(request):
 # views.py
 
 def reading(request):
-    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
-    openai.api_base = "https://api.openai.iniad.org/api/v1"
     if request.method == 'POST':
         length = request.POST.get('length', '')
         genre = request.POST.get('genre', '')
@@ -50,7 +47,7 @@ def reading(request):
             messages=[
                 {"role": "system", "content": "あなたは物語を作る著者です。会話への応答は文章のタイトルと文章の内容のみで結構です。"},
                 {"role": "user", "content": user_question},
-
+                {"role": "assistant", "content": chat_prompt},
             ]
         )
 
@@ -63,28 +60,22 @@ def reading(request):
 
 
 def generate_text(request):
-    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
-    openai.api_base = "https://api.openai.iniad.org/api/v1"
-
     if request.method == 'POST':
-        word_count = int(request.POST.get('word_count', 100 ))
+        word_count = int(request.POST.get('word_count', 50))
         genre = request.POST.get('genre', '')
 
-        chat_prompt = "Generate an  article in English. Words: {}, Genre: {}".format(word_count,genre)
 
         response = openai.ChatCompletion.create(
 
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": "You will be a teacher for beginner English student"},
-                {"role": "system", "content": "Then please generate the Title"},
-                {"role": "user", "content": chat_prompt},
-
+                {"role": "system", "content": f"Write a {genre} text with {word_count} words:"},
             ]
         )
 
         generated_text = response['choices'][0]['message']['content']
 
-        return render(request, "sample/reading.html", {"message": generated_text})
+        return render(request,"sample/reading.html",{"generated_text": generated_text})
 
-    return render(request,"sample/reading.html",{"message": generated_text})
+    return render(request,"sample/reading.html",{"generated_text": generated_text})
+

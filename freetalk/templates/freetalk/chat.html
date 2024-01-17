@@ -16,21 +16,25 @@
         <h1>FreeTalk Chat</h1>
     </header>
 
-    <div id="chat-container">
-        {% for message in chat_history %}
-            <div class="{% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
-                {% if message.role == 'user' %}
-                    <span class="message-sender">You:</span>
-                {% elif message.role == 'assistant' %}
-                    <span class="message-sender">Teacher:</span>
+    <body>
+
+        <h1>FreeTalk Chat</h1>
+
+        <div id="chat-container">
+            {% for message in chat_history %}
+                <div class="{% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
+                    {% if message.role == 'user' %}
+                        <span class="message-sender">You:</span>
+                    {% elif message.role == 'assistant' %}
+                        <span class="message-sender">Teacher:</span>
+                    {% endif %}
+                    {{ message.content }}
+                    {% if message.role == 'assistant' %}
+                    <button class="text-to-speech-btn" onclick="speakText('{{ message.path }}')">Listen</button>
                 {% endif %}
-                {{ message.content }}
-                {% if message.role == 'assistant' %}
-                <button class="text-to-speech-btn" onclick="speakText('{{ message.path }}')">Listen</button>
-            {% endif %}
-            </div>
-        {% endfor %}
-    </div>
+                </div>
+         {% endfor %}
+        </div>
 
     <form method="post" action="{% url 'chatgpt' %}">
         {% csrf_token %}
@@ -59,5 +63,5 @@
 
     </script>
 
-</body>
+    </body>
 </html>
