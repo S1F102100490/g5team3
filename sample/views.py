@@ -67,10 +67,10 @@ def generate_text(request):
     openai.api_base = "https://api.openai.iniad.org/api/v1"
     if request.method == 'POST':
         
-        word_count = int(request.POST.get("length",""))
+        word_count = request.POST.get("length","")
         genre = request.POST.get('genre', '')
 
-        input_text = "Generate a kind of  {} article, the  words of article must be {} in easy English".format(genre, word_count)
+        input_text = "Generate a kind of  {} article. Condition: the  words of article must be {} in easy English".format(genre, word_count)
         response = openai.ChatCompletion.create(
 
             model="gpt-3.5-turbo",
@@ -87,4 +87,3 @@ def generate_text(request):
 
     return render(request,"sample/reading.html",{"message": generated_text})
 
-    return render(request,"sample/reading.html",{"message": generated_text})
