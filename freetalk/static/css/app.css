@@ -69,7 +69,7 @@ form {
 
 /* 紙飛行機の画像を背景にする */
 .ask-btn {
-    background-image: url('static/images/10259.png'); /* 画像のパスを実際のものに置き換えてください */
+    background-image: url('static/media/10259.png'); /* 画像のパスを実際のものに置き換えてください */
     background-size: cover;
     background-repeat: no-repeat;
     text-indent: -9999px; /* テキストを非表示にするためのテクニック */

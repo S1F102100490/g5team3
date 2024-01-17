@@ -8,6 +8,7 @@ import openai
 from .models import GeneratedText
 from django.http import HttpResponse
 
+openai.api_key = settings.OPENAI_API_KEY
 openai.api_key = 'JEASLG20yKVDNCKvsosyuMcH-u5MRvkH2CUJ1LgxcyYR2VIkoRAJaJ3iGGfWLWStWIScV3-4q4p3vSGFXI0IwTw '
 
 def chatgpt(request):
@@ -37,7 +38,6 @@ def chatgpt(request):
 def reading(request):
     openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
     openai.api_base = "https://api.openai.iniad.org/api/v1"
-
     if request.method == 'POST':
         length = request.POST.get('length', '')
         genre = request.POST.get('genre', '')
@@ -50,7 +50,7 @@ def reading(request):
             messages=[
                 {"role": "system", "content": "あなたは物語を作る著者です。会話への応答は文章のタイトルと文章の内容のみで結構です。"},
                 {"role": "user", "content": user_question},
-                {"role": "assistant", "content": chat_prompt},
+
             ]
         )
 
@@ -87,3 +87,4 @@ def generate_text(request):
 
     return render(request,"sample/reading.html",{"message": generated_text})
 
+    return render(request,"sample/reading.html",{"message": generated_text})
