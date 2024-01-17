@@ -35,6 +35,9 @@ def chatgpt(request):
 # views.py
 
 def reading(request):
+    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
+    openai.api_base = "https://api.openai.iniad.org/api/v1"
+
     if request.method == 'POST':
         length = request.POST.get('length', '')
         genre = request.POST.get('genre', '')
@@ -60,22 +63,27 @@ def reading(request):
 
 
 def generate_text(request):
+    openai.api_key = "SPhexIGEF2VCHEkiBC1RnIhCmQb97438jbyBK0D-F84N7U_NCE8Iy0O40aPLg7RBSWKhIccjb_rbwqb82lSf1_Q"
+    openai.api_base = "https://api.openai.iniad.org/api/v1"
     if request.method == 'POST':
-        word_count = int(request.POST.get('word_count', 50))
+        
+        word_count = int(request.POST.get("length",""))
         genre = request.POST.get('genre', '')
 
-
+        input_text = "Generate a kind of  {} article, the  words of article must be {} in easy English".format(genre, word_count)
         response = openai.ChatCompletion.create(
 
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": f"Write a {genre} text with {word_count} words:"},
+                {"role": "system", "content": "You are a English teacher, now you will generate aricle for your student"},
+                {"role": "system", "content": " Your students are not good at studying English, please use easy English"},
+                {"role": "user", "content": input_text},
             ]
         )
 
         generated_text = response['choices'][0]['message']['content']
 
-        return render(request,"sample/reading.html",{"generated_text": generated_text})
+        return render(request,"sample/reading.html",{"message": generated_text})
 
-    return render(request,"sample/reading.html",{"generated_text": generated_text})
+    return render(request,"sample/reading.html",{"message": generated_text})
 
