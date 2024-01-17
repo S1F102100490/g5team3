@@ -114,3 +114,8 @@ footer p {
     padding: 5px 10px;
     cursor: pointer;
 }
+
+#generated text{
+    padding-left: 50px;
+    padding-right: 50px;
+}
