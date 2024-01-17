@@ -18,6 +18,8 @@
 
     <body>
 
+        <h1>FreeTalk Chat</h1>
+
         <div id="chat-container">
             {% for message in chat_history %}
                 <div class="{% if message.role == 'user' %}user-message{% else %}assistant-message{% endif %}">
