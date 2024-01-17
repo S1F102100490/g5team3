@@ -12,9 +12,8 @@
     <link href="{% static 'media' %}">
 </head>
 <body>
-    <header>
-        <h1>FreeTalk Chat</h1>
-    </header>
+
+    <h1>FreeTalk Chat</h1>
 
     <div id="chat-container">
         {% for message in chat_history %}
@@ -34,11 +33,9 @@
 
     <form method="post" action="{% url 'chatgpt' %}">
         {% csrf_token %}
-        <label for="question">Let's start chatting in English!!</label>
+        <label for="question">Ask me anything:</label>
         <input type="text" name="question" required>
-        <div class="ask-btn-container">
-            <button type="submit" class="ask-btn">Ask</button>
-        </div>
+        <button type="submit" class="ask-btn">Ask</button>
         <button type="button" class="clear-history-btn" onclick="clearHistory()">Clear History</button>
     </form>
 
